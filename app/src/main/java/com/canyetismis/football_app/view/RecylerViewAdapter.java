@@ -1,4 +1,4 @@
-package com.canyetismis.football_app.view.home;
+package com.canyetismis.football_app.view;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,15 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.canyetismis.football_app.R;
+import com.canyetismis.football_app.model.Team;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
 
-    private final ArrayList<String> mTeamNames;
+    private final List<Team> mTeamNames;
 
-    public RecylerViewAdapter(ArrayList<String> mTeamNames) {
+    public RecylerViewAdapter(List<Team> mTeamNames) {
         this.mTeamNames = mTeamNames;
     }
 
@@ -34,7 +35,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        holder.teamName.setText(mTeamNames.get(position));
+        holder.teamName.setText(mTeamNames.get(position).getTeamName());
 
     }
 
