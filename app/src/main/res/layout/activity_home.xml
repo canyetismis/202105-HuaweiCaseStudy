@@ -9,18 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@id/login"
-        android:text="Login with Google"
+        android:layout_centerVertical="true"
+        android:text="Home Page"
         android:textSize="16dp"/>
 
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:onClick="onLoginClicked"
-        android:text="Login" />
 </RelativeLayout>
-
