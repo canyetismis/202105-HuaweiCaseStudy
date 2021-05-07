@@ -1,4 +1,5 @@
 package com.canyetismis.football_app.view;
+
 import com.canyetismis.football_app.R;
 import com.canyetismis.football_app.model.Team;
 import com.canyetismis.football_app.viewmodel.TeamViewModel;

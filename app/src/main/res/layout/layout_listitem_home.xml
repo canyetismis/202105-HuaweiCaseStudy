@@ -3,14 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="5dp"
     android:id="@+id/parent_layout">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/team"
+        android:id="@+id/thumbnail"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/thumbnail"
+        android:layout_centerVertical="true"
         android:text="Team"
-        android:id="@+id/team_name"
-        android:textColor="@color/black"
-        android:textSize="16sp"/>
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:id="@+id/team_name"/>
 
 </RelativeLayout>
