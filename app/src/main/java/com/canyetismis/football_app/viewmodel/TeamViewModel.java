@@ -9,7 +9,7 @@ import com.canyetismis.football_app.repository.TeamRepository;
 
 import java.util.List;
 
-public class HomeActivityViewModel extends ViewModel {
+public class TeamViewModel extends ViewModel {
 
     private MutableLiveData<List<Team>> mTeams;
     private TeamRepository mRepo;

@@ -1,7 +1,7 @@
 package com.canyetismis.football_app.view;
 import com.canyetismis.football_app.R;
 import com.canyetismis.football_app.model.Team;
-import com.canyetismis.football_app.viewmodel.HomeActivityViewModel;
+import com.canyetismis.football_app.viewmodel.TeamViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -19,7 +19,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecylerViewAdapter mAdapter;
-    private HomeActivityViewModel mHomeActivityViewModel;
+    private TeamViewModel mTeamViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,57 +29,25 @@ public class HomeActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.recycler_view);
 
-        mHomeActivityViewModel = new ViewModelProvider(this).get(HomeActivityViewModel.class);
-        mHomeActivityViewModel.init();
+        initViewProvider();
+        initRecylerView();
+    }
 
-        mHomeActivityViewModel.getTeams().observe(this, new Observer<List<Team>>() {
+    private void initViewProvider(){
+        mTeamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
+        mTeamViewModel.init();
+
+        mTeamViewModel.getTeams().observe(this, new Observer<List<Team>>() {
             @Override
             public void onChanged(List<Team> teams) {
                 mAdapter.notifyDataSetChanged();
             }
         });
-        initRecylerView();
     }
-    /*
-    private void initTeams(){
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-        mTeams.add("Team B");
-        mTeams.add("Team A");
-    }
-    */
+
     private void initRecylerView(){
         Log.d(TAG, "initRecylerView: init recylerview");
-        mAdapter = new RecylerViewAdapter(mHomeActivityViewModel.getTeams().getValue());
+        mAdapter = new RecylerViewAdapter(mTeamViewModel.getTeams().getValue());
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
