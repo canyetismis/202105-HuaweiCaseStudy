@@ -15,12 +15,12 @@ import com.canyetismis.football_app.model.Team;
 
 import java.util.List;
 
-public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.ViewHolder> {
-    private static final String TAG = "RecyclerViewAdapter";
+public class RecylerViewAdapterHome extends RecyclerView.Adapter<RecylerViewAdapterHome.ViewHolder> {
+    private static final String TAG = "RecyclerViewAdapterHome";
 
     private final List<Team> mTeamNames;
 
-    public RecylerViewAdapter(List<Team> mTeamNames) {
+    public RecylerViewAdapterHome(List<Team> mTeamNames) {
         this.mTeamNames = mTeamNames;
     }
 

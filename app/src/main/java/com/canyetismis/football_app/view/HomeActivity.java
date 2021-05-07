@@ -1,10 +1,8 @@
 package com.canyetismis.football_app.view;
 
-import com.canyetismis.football_app.MainActivity;
 import com.canyetismis.football_app.R;
 import com.canyetismis.football_app.model.Team;
 import com.canyetismis.football_app.viewmodel.TeamViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -23,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
 
     private RecyclerView mRecyclerView;
-    private RecylerViewAdapter mAdapter;
+    private RecylerViewAdapterHome mAdapter;
     private TeamViewModel mTeamViewModel;
 
     @Override
@@ -57,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initRecylerView(){
         Log.d(TAG, "initRecylerView: init recylerview");
-        mAdapter = new RecylerViewAdapter(mTeamViewModel.getTeams().getValue());
+        mAdapter = new RecylerViewAdapterHome(mTeamViewModel.getTeams().getValue());
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
