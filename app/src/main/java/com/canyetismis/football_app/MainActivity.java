@@ -10,14 +10,11 @@ import android.widget.Button;
 import com.canyetismis.football_app.view.HomeActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        login = findViewById(R.id.login);
     }
 
     public void onLoginClicked(View view){

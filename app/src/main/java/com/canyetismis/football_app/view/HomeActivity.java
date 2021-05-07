@@ -1,8 +1,10 @@
 package com.canyetismis.football_app.view;
 
+import com.canyetismis.football_app.MainActivity;
 import com.canyetismis.football_app.R;
 import com.canyetismis.football_app.model.Team;
 import com.canyetismis.football_app.viewmodel.TeamViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -10,8 +12,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.util.List;
 
@@ -32,6 +36,11 @@ public class HomeActivity extends AppCompatActivity {
 
         initViewProvider();
         initRecylerView();
+    }
+
+    public void onFixtureButtonClicked(View v){
+        Intent intent = new Intent(HomeActivity.this, FixtureActivity.class);
+        startActivity(intent);
     }
 
     private void initViewProvider(){

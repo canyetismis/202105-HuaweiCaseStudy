@@ -14,4 +14,15 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/football"
+        android:layout_margin="16dp"
+        android:contentDescription="Make Fixtures"
+        android:onClick="onFixtureButtonClicked"
+        android:id="@+id/fixture"/>
+
 </RelativeLayout>
