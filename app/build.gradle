@@ -38,8 +38,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    //Adding RecylerView (Jetpack) to handle various lists
-    implementation "androidx.recyclerview:recyclerview:1.2.0"
+    //Adding ViewPager2 and RecylerView (Jetpack) to handle various lists
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
     //Adding Lifecycle (Jetpack) make ViewModel to observe the changes in repository
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"

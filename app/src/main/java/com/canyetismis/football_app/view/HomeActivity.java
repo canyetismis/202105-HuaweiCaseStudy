@@ -21,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
 
     private RecyclerView mRecyclerView;
-    private RecylerViewAdapterHome mAdapter;
+    private RecyclerViewAdapterHome mAdapter;
     private TeamViewModel mTeamViewModel;
 
     @Override
@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initRecylerView(){
         Log.d(TAG, "initRecylerView: init recylerview");
-        mAdapter = new RecylerViewAdapterHome(mTeamViewModel.getTeams().getValue());
+        mAdapter = new RecyclerViewAdapterHome(mTeamViewModel.getTeams().getValue());
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);

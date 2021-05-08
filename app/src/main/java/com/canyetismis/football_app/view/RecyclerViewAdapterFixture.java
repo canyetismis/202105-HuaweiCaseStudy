@@ -13,38 +13,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.canyetismis.football_app.R;
 import com.canyetismis.football_app.model.Fixture;
-import com.canyetismis.football_app.model.Team;
 
 import java.util.List;
 
-public class RecylerViewAdapterFixture extends RecyclerView.Adapter<RecylerViewAdapterFixture.ViewHolder> {
+public class RecyclerViewAdapterFixture extends RecyclerView.Adapter<RecyclerViewAdapterFixture.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapterFixture";
 
-    private final List<Team> teamNames;
+    private final List<Fixture> fixtures;
 
-    public RecylerViewAdapterFixture(List<Team> teamNames ) {
-        this.teamNames = teamNames;
+    public RecyclerViewAdapterFixture(List<Fixture> fixtures ) {
+        this.fixtures = fixtures;
     }
 
     @NonNull
     @Override
-    public RecylerViewAdapterFixture.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerViewAdapterFixture.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem_fixture, parent, false);
         return new ViewHolder(view);
     }
 
     @SuppressLint("LongLogTag")
     @Override
-    public void onBindViewHolder(@NonNull RecylerViewAdapterFixture.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewAdapterFixture.ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        holder.team1Name.setText(teamNames.get(position).getTeamName());
-        holder.team2Name.setText(teamNames.get(position).getTeamName());
+        holder.team1Name.setText(fixtures.get(position).getTeam1Name());
+        holder.team2Name.setText(fixtures.get(position).getTeam2Name());
     }
 
     @Override
     public int getItemCount() {
-        return teamNames.size();
+        return fixtures.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

@@ -4,8 +4,9 @@ public class Fixture {
     private String team1Name;
     private String team2Name;
 
-    public Fixture(String teamName){
-        this.team1Name = teamName;
+    public Fixture(String team1Name, String team2Name){
+        this.team1Name = team1Name;
+        this.team2Name = team2Name;
     }
 
     public Fixture(){}
