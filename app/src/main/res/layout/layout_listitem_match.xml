@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:paddingStart="10dp"
     android:paddingEnd="10dp"
-    android:id="@+id/parent_layout_f">
+    android:id="@+id/parent_layout_match">
 
     <ImageView
         android:layout_width="50dp"
@@ -19,7 +19,6 @@
         android:layout_toEndOf="@+id/thumbnail"
         android:layout_centerVertical="true"
         android:text="Team"
-        android:textColor="@color/white"
         android:textSize="16sp"
         android:id="@+id/team_1"/>
 
@@ -30,7 +29,6 @@
         android:layout_toEndOf="@+id/team_1"
         android:layout_centerVertical="true"
         android:text="vs"
-        android:textColor="@color/white"
         android:textSize="16sp"
         android:id="@+id/vs"/>
 
@@ -41,7 +39,6 @@
         android:layout_toEndOf="@+id/vs"
         android:layout_centerVertical="true"
         android:text="Team"
-        android:textColor="@color/white"
         android:textSize="16sp"
         android:id="@+id/team_2"/>
 

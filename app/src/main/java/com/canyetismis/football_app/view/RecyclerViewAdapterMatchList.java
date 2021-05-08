@@ -12,38 +12,38 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.canyetismis.football_app.R;
-import com.canyetismis.football_app.model.Fixture;
+import com.canyetismis.football_app.model.Match;
 
 import java.util.List;
 
-public class RecyclerViewAdapterFixture extends RecyclerView.Adapter<RecyclerViewAdapterFixture.ViewHolder> {
-    private static final String TAG = "RecyclerViewAdapterFixture";
+public class RecyclerViewAdapterMatchList extends RecyclerView.Adapter<RecyclerViewAdapterMatchList.ViewHolder> {
+    private static final String TAG = "RecyclerViewAdapterMatchList";
 
-    private final List<Fixture> fixtures;
+    private final List<Match> matches;
 
-    public RecyclerViewAdapterFixture(List<Fixture> fixtures ) {
-        this.fixtures = fixtures;
+    public RecyclerViewAdapterMatchList(List<Match> matches) {
+        this.matches = matches;
     }
 
     @NonNull
     @Override
-    public RecyclerViewAdapterFixture.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem_fixture, parent, false);
+    public RecyclerViewAdapterMatchList.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem_match, parent, false);
         return new ViewHolder(view);
     }
 
     @SuppressLint("LongLogTag")
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapterFixture.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewAdapterMatchList.ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        holder.team1Name.setText(fixtures.get(position).getTeam1Name());
-        holder.team2Name.setText(fixtures.get(position).getTeam2Name());
+        holder.team1Name.setText(matches.get(position).getTeam1Name());
+        holder.team2Name.setText(matches.get(position).getTeam2Name());
     }
 
     @Override
     public int getItemCount() {
-        return fixtures.size();
+        return matches.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -55,7 +55,7 @@ public class RecyclerViewAdapterFixture extends RecyclerView.Adapter<RecyclerVie
             super(itemView);
             team1Name = itemView.findViewById(R.id.team_1);
             team2Name = itemView.findViewById(R.id.team_2);
-            parentLayout = itemView.findViewById(R.id.parent_layout_f);
+            parentLayout = itemView.findViewById(R.id.parent_layout_match);
         }
     }
 }

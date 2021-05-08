@@ -1,15 +1,13 @@
 package com.canyetismis.football_app.model;
 
-public class Fixture {
+public class Match {
     private String team1Name;
     private String team2Name;
 
-    public Fixture(String team1Name, String team2Name){
+    public Match(String team1Name, String team2Name){
         this.team1Name = team1Name;
         this.team2Name = team2Name;
     }
-
-    public Fixture(){}
 
     public String getTeam1Name(){
         return team1Name;

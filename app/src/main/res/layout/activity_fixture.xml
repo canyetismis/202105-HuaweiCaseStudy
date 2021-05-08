@@ -6,14 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".view.FixtureActivity">
 
-    <!--androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler_view_f">
-
-    </androidx.recyclerview.widget.RecyclerView-->
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pages"
+        android:id="@+id/fixture_pages"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

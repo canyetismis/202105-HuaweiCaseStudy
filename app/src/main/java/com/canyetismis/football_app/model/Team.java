@@ -7,8 +7,6 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public Team(){}
-
     public String getTeamName(){
         return teamName;
     }

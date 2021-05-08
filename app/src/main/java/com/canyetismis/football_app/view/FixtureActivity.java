@@ -1,22 +1,17 @@
 package com.canyetismis.football_app.view;
 
 import com.canyetismis.football_app.R;
-import com.canyetismis.football_app.model.Fixture;
-import com.canyetismis.football_app.model.FixtureList;
+import com.canyetismis.football_app.model.Match;
+import com.canyetismis.football_app.model.FixtureWeek;
 import com.canyetismis.football_app.model.Team;
 import com.canyetismis.football_app.viewmodel.TeamViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +20,7 @@ public class FixtureActivity extends AppCompatActivity {
     private static final String TAG = "FixtureActivity";
 
     private ViewPager2 pages;
-    private ViewPagerAdapter pageAdapter;
+    private ViewPagerAdapterFixture pageAdapter;
     private TeamViewModel mTeamViewModel;
     private List<Team> teamList = new ArrayList<>();
 
@@ -46,25 +41,26 @@ public class FixtureActivity extends AppCompatActivity {
     }
 
     private void initViewPager(){
-        pages = findViewById(R.id.pages);
-        pageAdapter = new ViewPagerAdapter(makePages());
+        pages = findViewById(R.id.fixture_pages);
+        pageAdapter = new ViewPagerAdapterFixture(makeFixture());
         pages.setAdapter(pageAdapter);
     }
 
-    private List<FixtureList> makePages(){
-        List<FixtureList> fixtureLists = new ArrayList<>();
+    private List<FixtureWeek> makeFixture(){
+        List<FixtureWeek> fixtureWeeks = new ArrayList<>();
         for (int i=0; i<3; i++){
-            fixtureLists.add(new FixtureList(makeFixtures()));
+            fixtureWeeks.add(new FixtureWeek(generateMatches(), "Week " + i));
+            Log.d(TAG, fixtureWeeks.get(i).getWeekTitle());
         }
-        return fixtureLists;
+        return fixtureWeeks;
     }
 
-    private List<Fixture> makeFixtures(){
-        List<Fixture> fixtures = new ArrayList<>();
+    private List<Match> generateMatches(){
+        List<Match> matches = new ArrayList<>();
         for(int i=0; i < teamList.size(); i++ ){
-            fixtures.add(new Fixture(teamList.get(i).getTeamName(), teamList.get(i).getTeamName()));
+            matches.add(new Match(teamList.get(i).getTeamName(), teamList.get(i).getTeamName()));
         }
-        return fixtures;
+        return matches;
     }
 
 }
