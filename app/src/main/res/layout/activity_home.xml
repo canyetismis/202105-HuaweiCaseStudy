@@ -22,6 +22,6 @@
         android:layout_margin="16dp"
         android:contentDescription="Make Fixtures"
         android:onClick="onFixtureButtonClicked"
-        android:id="@+id/fixtureWeek"/>
+        android:id="@+id/fixtureWeeks"/>
 
 </RelativeLayout>

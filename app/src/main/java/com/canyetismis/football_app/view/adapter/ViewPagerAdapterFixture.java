@@ -1,4 +1,4 @@
-package com.canyetismis.football_app.view;
+package com.canyetismis.football_app.view.adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.canyetismis.football_app.R;
-import com.canyetismis.football_app.model.FixtureWeek;
+import com.canyetismis.football_app.model.FixtureWeeks;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ public class ViewPagerAdapterFixture extends RecyclerView.Adapter<ViewPagerAdapt
     private static final String TAG = "ViewPagerAdapterFixture";
 
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-    private final List<FixtureWeek> pages;
+    private final List<FixtureWeeks> pages;
 
-    public ViewPagerAdapterFixture(List<FixtureWeek> pages){
+    public ViewPagerAdapterFixture(List<FixtureWeeks> pages){
         this.pages = pages;
     }
 
@@ -36,13 +36,13 @@ public class ViewPagerAdapterFixture extends RecyclerView.Adapter<ViewPagerAdapt
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        FixtureWeek fixtureWeek = pages.get(position);
-        Log.d(TAG, fixtureWeek.getWeekTitle());
-        holder.weekTitle.setText(fixtureWeek.getWeekTitle());
+        FixtureWeeks fixtureWeeks = pages.get(position);
+        Log.d(TAG, fixtureWeeks.getWeekTitle());
+        holder.weekTitle.setText(fixtureWeeks.getWeekTitle());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(holder.matchList.getContext());
-        layoutManager.setInitialPrefetchItemCount(fixtureWeek.getList().size());
-        RecyclerViewAdapterMatchList fixtureAdapter = new RecyclerViewAdapterMatchList(fixtureWeek.getList());
+        layoutManager.setInitialPrefetchItemCount(fixtureWeeks.getList().size());
+        RecyclerViewAdapterMatchList fixtureAdapter = new RecyclerViewAdapterMatchList(fixtureWeeks.getList());
 
         holder.matchList.setLayoutManager(layoutManager);
         holder.matchList.setAdapter(fixtureAdapter);

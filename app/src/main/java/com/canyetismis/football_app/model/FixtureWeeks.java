@@ -2,11 +2,11 @@ package com.canyetismis.football_app.model;
 
 import java.util.List;
 
-public class FixtureWeek {
+public class FixtureWeeks {
     private List<Match> matches;
     private String weekTitle;
 
-    public FixtureWeek(List<Match> matches, String weekTitle){
+    public FixtureWeeks(List<Match> matches, String weekTitle){
         this.matches = matches;
         this.weekTitle = weekTitle;
     }

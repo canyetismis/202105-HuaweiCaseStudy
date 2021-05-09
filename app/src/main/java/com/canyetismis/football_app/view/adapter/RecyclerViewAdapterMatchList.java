@@ -1,11 +1,10 @@
-package com.canyetismis.football_app.view;
+package com.canyetismis.football_app.view.adapter;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,13 +48,11 @@ public class RecyclerViewAdapterMatchList extends RecyclerView.Adapter<RecyclerV
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView team1Name;
         TextView team2Name;
-        RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             team1Name = itemView.findViewById(R.id.team_1);
             team2Name = itemView.findViewById(R.id.team_2);
-            parentLayout = itemView.findViewById(R.id.parent_layout_match);
         }
     }
 }
