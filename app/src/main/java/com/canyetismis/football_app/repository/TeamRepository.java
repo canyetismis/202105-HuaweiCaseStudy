@@ -46,7 +46,7 @@ public class TeamRepository {
 
     private List<FixtureWeeks> generateFixture(List<Team> teams){
         List<Team> team_list = new ArrayList<>(teams);
-        List<FixtureWeeks> fixtures = new ArrayList<>();
+        List<FixtureWeeks> fixture = new ArrayList<>();
 
         if (team_list.size() % 2 != 0) {
             team_list.add(new Team(notPlaying)); // If odd number of teams add a dummy team
@@ -83,10 +83,10 @@ public class TeamRepository {
                 }
             }
 
-            fixtures.add(new FixtureWeeks(matches, "Week " + (week+1) + " - 1st Half of League"));
+            fixture.add(new FixtureWeeks(matches, "Week " + (week+1) + " - 1st Half of League"));
         }
-        fixtures.addAll(invert(fixtures,numWeeks));
-        return fixtures;
+        fixture.addAll(invert(fixture,numWeeks));
+        return fixture;
     }
 
     private List<FixtureWeeks> invert(List<FixtureWeeks> league1, int numWeeks){
