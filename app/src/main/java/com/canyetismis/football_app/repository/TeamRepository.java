@@ -30,7 +30,7 @@ public class TeamRepository {
     }
 
     private static void setTeams(){
-        for(int i=0; i<4; i++){
+        for(int i=0; i<15; i++){
             dataSet.add(new Team("Team "+ i));
         }
     }
@@ -41,39 +41,46 @@ public class TeamRepository {
         data.setValue(fixture);
         return data;
     }
+    
+    private final String notPlaying = "Not playing";
 
     private List<FixtureWeeks> generateFixture(List<Team> teams){
         List<Team> team_list = new ArrayList<>(teams);
         List<FixtureWeeks> fixtures = new ArrayList<>();
 
         if (team_list.size() % 2 != 0) {
-            team_list.add(new Team("Bye")); // If odd number of teams add a dummy Team
+            team_list.add(new Team(notPlaying)); // If odd number of teams add a dummy team
         }
 
-        int numWeeks = (team_list.size()-1); // Weeks needed to complete a single Half League
+        int numWeeks = (team_list.size()-1); // Weeks needed to complete one half of league
         int halfSize = team_list.size() / 2;
 
         List<Team> rotating_teams = new ArrayList<>(team_list);
         rotating_teams.remove(0);
 
         int size = rotating_teams.size();
+        String firstTeam= team_list.get(0).getTeamName();
 
         for(int week = 0; week<numWeeks; week++){
             List<Match> matches = new ArrayList<>();
 
             int team_idx = week % size;
 
-            matches.add(new Match(
-                    rotating_teams.get(team_idx).getTeamName(),
-                    team_list.get(0).getTeamName()
-            ));
+            String team = rotating_teams.get(team_idx).getTeamName();
+            matches.add(new Match(firstTeam, team));
+
             for (int i = 1; i<halfSize; i++){
-                int firstTeam = (week + i) % size;
-                int secondTeam = (week + size - i) % size;
-                matches.add( new Match(
-                        rotating_teams.get(firstTeam).getTeamName(),
-                        rotating_teams.get(secondTeam).getTeamName())
-                );
+                int idx1 = (week + i) % size;
+                int idx2 = (week + size - i) % size;
+
+                String team1 = rotating_teams.get(idx1).getTeamName();
+                String team2 = rotating_teams.get(idx2).getTeamName();
+
+                if(team1 == notPlaying){
+                    matches.add(new Match(team2,team1));
+                } else {
+                    matches.add(new Match(team1,team2));
+                }
             }
 
             fixtures.add(new FixtureWeeks(matches, "Week " + (week+1) + " - 1st Half of League"));
@@ -88,7 +95,13 @@ public class TeamRepository {
             List<Match> temp = new ArrayList<>(league1.get(week).getList());
             List<Match> matches = new ArrayList<>();
             for (int i=0;i< temp.size(); i++){
-                matches.add(new Match(temp.get(i).getTeam2Name(),temp.get(i).getTeam1Name()));
+                String team2 = temp.get(i).getTeam2Name();
+                String team1 = temp.get(i).getTeam1Name();
+                if(team2 == notPlaying){
+                    matches.add(new Match(team1,team2));
+                } else {
+                    matches.add(new Match(team2,team1));
+                }
             }
             league2.add(new FixtureWeeks(matches, "Week " + (week+1) + " - 2nd Half of League"));
         }

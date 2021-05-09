@@ -28,7 +28,7 @@
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/team_1"
         android:layout_centerVertical="true"
-        android:text="vs"
+        android:text="-"
         android:textSize="16sp"
         android:id="@+id/vs"/>
 
