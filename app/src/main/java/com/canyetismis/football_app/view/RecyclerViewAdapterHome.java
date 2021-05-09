@@ -46,12 +46,10 @@ public class RecyclerViewAdapterHome extends RecyclerView.Adapter<RecyclerViewAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView teamName;
-        RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             teamName = itemView.findViewById(R.id.team_name);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 }

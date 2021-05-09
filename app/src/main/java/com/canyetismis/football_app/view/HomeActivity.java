@@ -38,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onFixtureButtonClicked(View v){
         Intent intent = new Intent(HomeActivity.this, FixtureActivity.class);
+        //intent.putExtra("ViewModel", mTeamViewModel);
         startActivity(intent);
     }
 
