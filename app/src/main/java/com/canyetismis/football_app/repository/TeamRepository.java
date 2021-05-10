@@ -1,39 +1,66 @@
 package com.canyetismis.football_app.repository;
 
+import android.app.Application;
+import android.content.Context;
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.canyetismis.football_app.model.FixtureWeeks;
 import com.canyetismis.football_app.model.Match;
 import com.canyetismis.football_app.model.Team;
+import com.canyetismis.football_app.repository.cache.TeamDao;
+import com.canyetismis.football_app.repository.cache.TeamDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TeamRepository {
 
-    private static TeamRepository instance;
-    private static final ArrayList<Team> dataSet = new ArrayList<>();
-    private static final ArrayList<FixtureWeeks> fixture = new ArrayList<>();
+    private TeamDao mTeamDao;
+    private LiveData<List<Team>> mTeams;
 
-    public static TeamRepository getInstance(){
-        if(instance == null){
-            instance = new TeamRepository();
-            setTeams();
-        }
-        return instance;
+    public TeamRepository(Context context){
+        TeamDatabase db = TeamDatabase.getDatabase(context);
+        //insert(setTeams());
+        mTeamDao = db.teamDao();
+        //insert(new Team("A"));
+        //insert(new Team("B"));
+        mTeams = mTeamDao.getAllTeams();
     }
 
-    public MutableLiveData<List<Team>> getTeams(){
+    public LiveData<List<Team>> geteTeams(){
         MutableLiveData<List<Team>> data = new MutableLiveData<>();
-        data.setValue(dataSet);
+        data.setValue(setTeams());
         return data;
     }
 
-    private static void setTeams(){
-        for(int i=0; i<15; i++){
-            dataSet.add(new Team("Team "+ i));
-        }
+    public LiveData<List<Team>> getTeams(){
+        mTeams = mTeamDao.getAllTeams();
+        return mTeams;
     }
+
+    private void insert(Team team){
+        TeamDatabase.databaseWriteExecutor.execute(() ->{
+            mTeamDao.insert(team);
+        });
+    }
+
+    private List<Team> setTeams(){
+        List<Team> teams = new ArrayList<>();
+        for(int i=0; i<15; i++){
+            teams.add(new Team("Team "+ i));
+        }
+        return teams;
+    }
+
+
+/*
+
+
+
+
 
     public MutableLiveData<List<FixtureWeeks>> getFixture(){
         fixture.addAll(generateFixture(dataSet));
@@ -41,7 +68,7 @@ public class TeamRepository {
         data.setValue(fixture);
         return data;
     }
-    
+
     private final String notPlaying = "Not playing";
 
     private List<FixtureWeeks> generateFixture(List<Team> teams){
@@ -107,4 +134,6 @@ public class TeamRepository {
         }
         return league2;
     }
+*/
 }
+

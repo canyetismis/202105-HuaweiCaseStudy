@@ -44,19 +44,15 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initViewProvider(){
         mTeamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
-        mTeamViewModel.init();
-
-        mTeamViewModel.getTeams().observe(this, new Observer<List<Team>>() {
-            @Override
-            public void onChanged(List<Team> teams) {
-                mAdapter.notifyDataSetChanged();
-            }
+        mTeamViewModel.init(this);
+        mTeamViewModel.getTeams().observe(this, teamList -> {
+            mAdapter.submitList(teamList);
         });
     }
 
     private void initRecylerView(){
         Log.d(TAG, "initRecylerView: init recylerview");
-        mAdapter = new RecyclerViewAdapterHome(mTeamViewModel.getTeams().getValue());
+        mAdapter = new RecyclerViewAdapterHome(new RecyclerViewAdapterHome.TeamDiff());
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
