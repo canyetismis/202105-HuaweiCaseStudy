@@ -43,8 +43,9 @@ public class FixtureActivity extends AppCompatActivity {
                 .get(TeamViewModel.class);
         mTeamViewModel.getTeams().observe(this, teamList -> {
             mTeams = new ArrayList<>(teamList);
-
-            initViewPager();
+            if(mTeams.size() > 0){
+                initViewPager();
+            }
         });
     }
 
