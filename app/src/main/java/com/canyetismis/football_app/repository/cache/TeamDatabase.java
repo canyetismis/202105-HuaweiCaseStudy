@@ -29,7 +29,7 @@ public abstract class TeamDatabase extends RoomDatabase {
                 if (INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TeamDatabase.class, "team_database")
-                            .addCallback(sRoomDatabaseCallback)
+                            //.addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
@@ -47,15 +47,16 @@ public abstract class TeamDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
-                TeamDao dao = INSTANCE.teamDao();
-                dao.deleteAllTeams();
-
+                // TeamDao dao = INSTANCE.teamDao();
+                // dao.deleteAllTeams();
+                /*
                 Team word = new Team("Hello");
                 dao.insert(word);
                 word = new Team("World");
                 dao.insert(word);
                 word = new Team("Toodles");
                 dao.insert(word);
+                 */
             });
         }
     };

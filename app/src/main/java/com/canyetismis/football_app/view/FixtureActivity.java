@@ -24,7 +24,7 @@ public class FixtureActivity extends AppCompatActivity {
     private ViewPager2 pages;
     private ViewPagerAdapterFixture pageAdapter;
     private TeamViewModel mTeamViewModel;
-    private List<Team> mTeams = new ArrayList<>();
+    private List<Team> mTeams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +39,16 @@ public class FixtureActivity extends AppCompatActivity {
     }
 
     private void initViewProvider(){
-        mTeamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
-        mTeamViewModel.init(this);
+        mTeamViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()))
+                .get(TeamViewModel.class);
         mTeamViewModel.getTeams().observe(this, teamList -> {
             mTeams = new ArrayList<>(teamList);
+
             initViewPager();
         });
     }
 
     private void initViewPager(){
-
         pageAdapter = new ViewPagerAdapterFixture(generateFixture(mTeams));
         pages.setAdapter(pageAdapter);
     }

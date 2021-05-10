@@ -1,7 +1,6 @@
 package com.canyetismis.football_app.repository.cache;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -15,7 +14,7 @@ import java.util.List;
 public interface TeamDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Team team);
+    void insert(List<Team> teams);
 
     @Query("DELETE FROM team_table")
     void deleteAllTeams();

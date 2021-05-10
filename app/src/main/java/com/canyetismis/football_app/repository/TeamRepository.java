@@ -20,14 +20,18 @@ public class TeamRepository {
 
     private TeamDao mTeamDao;
     private LiveData<List<Team>> mTeams;
+    private LiveData<List<FixtureWeeks>> mFixture;
 
-    public TeamRepository(Context context){
-        TeamDatabase db = TeamDatabase.getDatabase(context);
+    public TeamRepository(Application application){
+        TeamDatabase db = TeamDatabase.getDatabase(application);
         //insert(setTeams());
         mTeamDao = db.teamDao();
         //insert(new Team("A"));
         //insert(new Team("B"));
-        mTeams = mTeamDao.getAllTeams();
+        refresh();
+        testFixture();
+        //insert(setTeams());
+        //mTeams = mTeamDao.getAllTeams();
     }
 
     public LiveData<List<Team>> geteTeams(){
@@ -41,9 +45,22 @@ public class TeamRepository {
         return mTeams;
     }
 
-    private void insert(Team team){
+    public LiveData<List<FixtureWeeks>> getFixture(){
+        return mFixture;
+    }
+
+    private void insert(List<Team> team){
         TeamDatabase.databaseWriteExecutor.execute(() ->{
             mTeamDao.insert(team);
+        });
+    }
+
+    private void refresh(){
+        TeamDatabase.databaseWriteExecutor.execute(()->{
+            mTeamDao.deleteAllTeams();
+            mTeamDao.insert(setTeams());
+            mTeams = mTeamDao.getAllTeams();
+            //mFixture = new MutableLiveData<>(setFixture(setTeams()));
         });
     }
 
@@ -54,21 +71,15 @@ public class TeamRepository {
         }
         return teams;
     }
-
-
-/*
-
-
-
-
-
-    public MutableLiveData<List<FixtureWeeks>> getFixture(){
-        fixture.addAll(generateFixture(dataSet));
-        MutableLiveData<List<FixtureWeeks>> data = new MutableLiveData<>();
-        data.setValue(fixture);
-        return data;
+    private void testFixture(){
+        mFixture = new MutableLiveData<>(generateFixture(setTeams()));
+    }
+    private List<FixtureWeeks> setFixture(List<Team> teams){
+        List<FixtureWeeks> fixture = new ArrayList<>(generateFixture(teams));
+        return fixture;
     }
 
+    //Fixture Generation Algorithm
     private final String notPlaying = "Not playing";
 
     private List<FixtureWeeks> generateFixture(List<Team> teams){
@@ -134,6 +145,5 @@ public class TeamRepository {
         }
         return league2;
     }
-*/
 }
 

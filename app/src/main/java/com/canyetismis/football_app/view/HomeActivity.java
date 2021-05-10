@@ -43,8 +43,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initViewProvider(){
-        mTeamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
-        mTeamViewModel.init(this);
+        mTeamViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()))
+                .get(TeamViewModel.class);
         mTeamViewModel.getTeams().observe(this, teamList -> {
             mAdapter.submitList(teamList);
         });
