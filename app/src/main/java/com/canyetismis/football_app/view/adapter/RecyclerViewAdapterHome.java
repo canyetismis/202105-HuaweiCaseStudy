@@ -30,6 +30,8 @@ public class RecyclerViewAdapterHome extends ListAdapter<Team, RecyclerViewAdapt
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Log.d(TAG, "onBindViewHolder: called");
+
         Team current = getItem(position);
         holder.bind(current.getTeamName());
     }

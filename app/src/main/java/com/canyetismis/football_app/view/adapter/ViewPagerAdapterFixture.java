@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.canyetismis.football_app.R;
-import com.canyetismis.football_app.model.FixtureWeeks;
+import com.canyetismis.football_app.model.FixtureWeek;
 
 import java.util.List;
 
 public class ViewPagerAdapterFixture extends RecyclerView.Adapter<ViewPagerAdapterFixture.ViewHolder> {
     private static final String TAG = "ViewPagerAdapterFixture";
 
-    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-    private final List<FixtureWeeks> pages;
+    private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+    private final List<FixtureWeek> pages;
 
-    public ViewPagerAdapterFixture(List<FixtureWeeks> pages){
+    public ViewPagerAdapterFixture(List<FixtureWeek> pages){
         this.pages = pages;
     }
 
@@ -29,20 +29,19 @@ public class ViewPagerAdapterFixture extends RecyclerView.Adapter<ViewPagerAdapt
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_list, parent, false);
-        return new ViewPagerAdapterFixture.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        FixtureWeeks fixtureWeeks = pages.get(position);
-        Log.d(TAG, fixtureWeeks.getWeekTitle());
-        holder.weekTitle.setText(fixtureWeeks.getWeekTitle());
+        FixtureWeek fixtureWeek = pages.get(position);
+        holder.weekTitle.setText(fixtureWeek.getWeekTitle());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(holder.matchList.getContext());
-        layoutManager.setInitialPrefetchItemCount(fixtureWeeks.getList().size());
-        RecyclerViewAdapterMatchList fixtureAdapter = new RecyclerViewAdapterMatchList(fixtureWeeks.getList());
+        layoutManager.setInitialPrefetchItemCount(fixtureWeek.getList().size());
+        RecyclerViewAdapterMatchList fixtureAdapter = new RecyclerViewAdapterMatchList(fixtureWeek.getList());
 
         holder.matchList.setLayoutManager(layoutManager);
         holder.matchList.setAdapter(fixtureAdapter);
@@ -54,7 +53,7 @@ public class ViewPagerAdapterFixture extends RecyclerView.Adapter<ViewPagerAdapt
         return pages.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView weekTitle;
         RecyclerView matchList;
 
@@ -62,7 +61,6 @@ public class ViewPagerAdapterFixture extends RecyclerView.Adapter<ViewPagerAdapt
             super(itemView);
             weekTitle =itemView.findViewById(R.id.week_title);
             matchList = itemView.findViewById(R.id.match_list);
-
         }
     }
 }

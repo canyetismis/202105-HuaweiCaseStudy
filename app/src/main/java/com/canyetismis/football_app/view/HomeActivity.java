@@ -43,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initViewProvider(){
+        Log.d(TAG, "initRecylerView: init viewProvider");
         mTeamViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()))
                 .get(TeamViewModel.class);
         mTeamViewModel.getTeams().observe(this, teamList -> {

@@ -1,14 +1,13 @@
 package com.canyetismis.football_app.view;
 
 import com.canyetismis.football_app.R;
-import com.canyetismis.football_app.model.FixtureWeeks;
+import com.canyetismis.football_app.model.FixtureWeek;
 import com.canyetismis.football_app.model.Match;
 import com.canyetismis.football_app.model.Team;
 import com.canyetismis.football_app.view.adapter.ViewPagerAdapterFixture;
 import com.canyetismis.football_app.viewmodel.TeamViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -39,6 +38,7 @@ public class FixtureActivity extends AppCompatActivity {
     }
 
     private void initViewProvider(){
+        Log.d(TAG, "initRecylerView: init viewprovider");
         mTeamViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()))
                 .get(TeamViewModel.class);
         mTeamViewModel.getTeams().observe(this, teamList -> {
@@ -50,6 +50,7 @@ public class FixtureActivity extends AppCompatActivity {
     }
 
     private void initViewPager(){
+        Log.d(TAG, "initRecylerView: init viewpager");
         pageAdapter = new ViewPagerAdapterFixture(generateFixture(mTeams));
         pages.setAdapter(pageAdapter);
     }
@@ -57,9 +58,9 @@ public class FixtureActivity extends AppCompatActivity {
     //Fixture Generation Algorithm
     private final String notPlaying = "Not playing";
 
-    private List<FixtureWeeks> generateFixture(List<Team> teams){
+    private List<FixtureWeek> generateFixture(List<Team> teams){
         List<Team> team_list = new ArrayList<>(teams);
-        List<FixtureWeeks> fixture = new ArrayList<>();
+        List<FixtureWeek> fixture = new ArrayList<>();
 
         if (team_list.size() % 2 != 0) {
             team_list.add(new Team(notPlaying)); // If odd number of teams add a dummy team
@@ -96,14 +97,14 @@ public class FixtureActivity extends AppCompatActivity {
                 }
             }
 
-            fixture.add(new FixtureWeeks(matches, "Week " + (week+1) + " - 1st Half of League"));
+            fixture.add(new FixtureWeek(matches, "Week " + (week+1) + " - 1st Half of League"));
         }
         fixture.addAll(invert(fixture,numWeeks));
         return fixture;
     }
 
-    private List<FixtureWeeks> invert(List<FixtureWeeks> league1, int numWeeks){
-        List<FixtureWeeks> league2 = new ArrayList<>();
+    private List<FixtureWeek> invert(List<FixtureWeek> league1, int numWeeks){
+        List<FixtureWeek> league2 = new ArrayList<>();
         for(int week=0; week<numWeeks; week++){
             List<Match> temp = new ArrayList<>(league1.get(week).getList());
             List<Match> matches = new ArrayList<>();
@@ -116,7 +117,7 @@ public class FixtureActivity extends AppCompatActivity {
                     matches.add(new Match(team2,team1));
                 }
             }
-            league2.add(new FixtureWeeks(matches, "Week " + (week+1) + " - 2nd Half of League"));
+            league2.add(new FixtureWeek(matches, "Week " + (week+1) + " - 2nd Half of League"));
         }
         return league2;
     }
