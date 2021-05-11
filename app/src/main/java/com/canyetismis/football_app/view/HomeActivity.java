@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view);
 
         initViewProvider();
-        initRecylerView();
+
     }
 
     public void onFixtureButtonClicked(View v){
@@ -47,7 +47,11 @@ public class HomeActivity extends AppCompatActivity {
         mTeamViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()))
                 .get(TeamViewModel.class);
         mTeamViewModel.getTeams().observe(this, teamList -> {
-            mAdapter.submitList(teamList);
+            if(teamList.size() > 0 || teamList != null) {
+                initRecylerView();
+                mAdapter.submitList(teamList);
+
+            }
         });
     }
 

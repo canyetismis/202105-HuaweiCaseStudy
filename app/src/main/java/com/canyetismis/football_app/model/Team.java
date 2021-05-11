@@ -3,12 +3,15 @@ package com.canyetismis.football_app.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName = "team_table")
 public class Team {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @SerializedName("name")
     private String teamName;
 
     public Team(String teamName){
