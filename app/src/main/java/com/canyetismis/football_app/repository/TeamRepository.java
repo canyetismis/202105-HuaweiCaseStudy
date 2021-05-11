@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.canyetismis.football_app.model.Team;
 import com.canyetismis.football_app.repository.cache.TeamDao;
 import com.canyetismis.football_app.repository.cache.TeamDatabase;
+import com.canyetismis.football_app.repository.remote.TeamRestClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +17,20 @@ public class TeamRepository {
 
     private final TeamDao mTeamDao;
     private LiveData<List<Team>> mTeams;
+    private TeamRestClient client;
 
     public TeamRepository(Application application){
         TeamDatabase db = TeamDatabase.getDatabase(application);
         mTeamDao = db.teamDao();
-        refresh();
-    }
+        client = TeamRestClient.getInstance();
+        //Backend is checked only once when the application is first started
+        if(client.madeRequest){
+            mTeams = mTeamDao.getAllTeams();
+        } else {
+            mTeams = client.getTeams();
+            refreshCache(client.getTeams().getValue());
+        }
 
-    public LiveData<List<Team>> geteTeams(){
-        MutableLiveData<List<Team>> data = new MutableLiveData<>();
-        data.setValue(setTeams());
-        return data;
     }
 
     public LiveData<List<Team>> getTeams(){
@@ -34,20 +38,12 @@ public class TeamRepository {
         return mTeams;
     }
 
-    private void refresh(){
+    private void refreshCache(List<Team> teams){
         TeamDatabase.databaseWriteExecutor.execute(()->{
             mTeamDao.deleteAllTeams();
-            mTeamDao.insert(setTeams());
-            mTeams = mTeamDao.getAllTeams();
-        });
-    }
+            mTeamDao.insert(teams);
 
-    private List<Team> setTeams(){
-        List<Team> teams = new ArrayList<>();
-        for(int i=0; i<15; i++){
-            teams.add(new Team("Team "+ i));
-        }
-        return teams;
+        });
     }
 }
 

@@ -29,35 +29,10 @@ public abstract class TeamDatabase extends RoomDatabase {
                 if (INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TeamDatabase.class, "team_database")
-                            //.addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
         }
         return INSTANCE;
     }
-
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-
-            // If you want to keep data through app restarts,
-            // comment out the following block
-            databaseWriteExecutor.execute(() -> {
-                // Populate the database in the background.
-                // If you want to start with more words, just add them.
-                // TeamDao dao = INSTANCE.teamDao();
-                // dao.deleteAllTeams();
-                /*
-                Team word = new Team("Hello");
-                dao.insert(word);
-                word = new Team("World");
-                dao.insert(word);
-                word = new Team("Toodles");
-                dao.insert(word);
-                 */
-            });
-        }
-    };
 }
