@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+
     def lifecycle_version = "2.3.1"
     def room_version = "2.3.0"
     def retrofit_version = "2.9.0"
@@ -59,7 +60,10 @@ dependencies {
     //Firebase related dependencies
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
     implementation 'com.google.firebase:firebase-analytics'
+    //push notification
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
-
+    //sign in with google
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 }
 apply plugin: 'com.google.gms.google-services'
