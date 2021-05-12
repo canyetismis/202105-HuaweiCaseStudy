@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "315909404590",
+    "project_id": "football-app-f7585",
+    "storage_bucket": "football-app-f7585.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315909404590:android:cb15bba75a37f11145fa3f",
+        "android_client_info": {
+          "package_name": "com.canyetismis.football_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315909404590-anm2bufvejg6djmiqvs8ffit8pro2eci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1ONYDUQb5t-q8oK3Zsr8eEH2EtwngqRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315909404590-anm2bufvejg6djmiqvs8ffit8pro2eci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

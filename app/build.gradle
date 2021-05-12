@@ -55,4 +55,11 @@ dependencies {
     //Adding Retrofit to handle web requests
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    //Firebase related dependencies
+    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+
 }
+apply plugin: 'com.google.gms.google-services'
