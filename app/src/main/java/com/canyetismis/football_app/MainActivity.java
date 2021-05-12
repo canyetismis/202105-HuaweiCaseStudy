@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onRestart() {
+    protected void onStart() {
         super.onRestart();
         if(user != null){
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
